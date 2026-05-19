@@ -38,7 +38,6 @@ public:
             hack_thread.detach();
         }
     }
-
 private:
     Api *api;
     JNIEnv *env;
