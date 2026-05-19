@@ -32,7 +32,9 @@ public:
 
     void postAppSpecialize(const AppSpecializeArgs *) override {
         if (enable_hack) {
-            std::thread hack_thread(hack_prepare, api, game_data_dir, data, length);
+            std::thread hack_thread([this]() {
+                hack_prepare(this->api, this->game_data_dir, this->data, this->length);
+            });
             hack_thread.detach();
         }
     }
