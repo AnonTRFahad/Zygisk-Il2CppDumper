@@ -6,6 +6,7 @@
 #include "il2cpp_dump.h"
 #include "log.h"
 #include "xdl.h"
+#include "il2cpp-class.h"
 #include <cstring>
 #include <cstdio>
 #include <unistd.h>
@@ -17,6 +18,7 @@
 #include <linux/unistd.h>
 #include <array>
 #include <sys/stat.h>
+#include <cinttypes>
 #include "zygisk.hpp"
 
 void hook_il2cpp_string_apis(zygisk::Api *api, void *il2cpp_handle);
@@ -335,7 +337,7 @@ void hack_prepare(zygisk::Api *api, const char *game_data_dir, void *data, size_
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
     auto game_data_dir = (const char *) reserved;
-    std::thread hack_thread(hack_start, game_data_dir);
+    std::thread hack_thread(hack_start, game_data_dir, nullptr);
     hack_thread.detach();
     return JNI_VERSION_1_6;
 }
